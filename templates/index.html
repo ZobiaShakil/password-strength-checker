@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Password Strength Checker</title>
+    <!-- Link to the decorative CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Password Strength Checker</h1>
+    </header>
+    <form method="POST">
+        <div class="input-group">
+            <input type="password" name="password" placeholder="Enter your password" required>
+        </div>
+        <button type="submit">Check Password</button>
+    </form>
+
+    {% if rating %}
+        <div class="feedback-list">
+            <h2>Password Strength: {{ rating }}</h2>
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li class="{{ 'error' if rating != 'Strong' else 'success' }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    {% endif %}
+</body>
+</html>
